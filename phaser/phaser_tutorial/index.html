@@ -21,19 +21,30 @@ function preload() {
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    game.load.spritesheet('dude', 'assets/character.png', 32, 48);
+    game.load.audio('chocobo', ['assets/music/chocobo-modloop01.mp3']);
+    game.load.audio('coin', ['assets/music/coin.mp3']);
+    game.load.audio('win', ['assets/music/win.mp3']);
 
 }
 
 var player;
 var platforms;
 var cursors;
+var music;
+var coinsound;
+var winmusic
 
 var stars;
 var score = 0;
 var scoreText;
 
 function create() {
+    // Adding music to play from the beginning
+    music = game.add.audio('chocobo');
+    coinsound = game.add.audio('coin');
+    winmusic = game.add.audio('win');
+    music.play();
 
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -153,6 +164,7 @@ function update() {
 function collectStar (player, star) {
     
     // Removes the star from the screen
+    coinsound.play();
     star.kill();
 
     //  Add and update the score
@@ -164,7 +176,11 @@ function collectStar (player, star) {
 
 function complete(points) {
     if (points === 120) {
-        scoreText.text = 'You Win!';
+        scoreText.text = 'Score: ' + score;
+        music.pause();
+        winmusic.play();
+        scoreText = game.add.text(350,200, 'You Win!', { fontSize: '100px', fill: '#ff0000' });
+        // scoreText.text = 'You Win!';
     } else {
         scoreText.text = 'Score: ' + score;
     }
