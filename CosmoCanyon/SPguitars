@@ -1,37 +1,63 @@
 #guitars aka buzzypluck1-3
 use_bpm 65
-live_loop :guitars do
-  in_thread(name: :guitar1) do
-    loop do
-      use_synth :dtri
-      riff = (ring :e3, :g3, :e3, :g3, :g3, :b3, :g3, :b3, :e3, :a3, :e3, :a3)
-      play riff.tick, release: 0.5, cutoff: 80
-      sleep 0.25
-      riff1 = (ring :e3, :g3, :e3, :g3, :e3, :g3)
-      play riff1.tick, release: 0.25, cutoff: 80
-      sleep 0.25
+##| live_loop :guitars do
+in_thread(name: :guitar1) do
+  loop do
+    use_synth :dtri
+    #start at measure 8
+    riffw1 = (ring :r)
+    8.times do
+      play riffw1.tick
+      sleep 1
+    end
+    riff = (ring :e3, :g3, :e3, :g3, :g3, :b3, :g3, :b3, :e3, :a3, :e3, :a3)
+    play riff.tick, release: 0.5, cutoff: 80
+    sleep 0.25
+    riff1 = (ring :e3, :g3, :e3, :g3)
+    play riff1.tick, release: 0.25, cutoff: 80
+    sleep 0.25
+    riff2 = (ring :r)
+    10.times do
+      play riff2.tick
+      sleep 1
+    end
+    8.times do
+      play_pattern_timed [52,55], [0.25], cutoff: 80
+      
+      
     end
   end
-  
-  in_thread(name: :guitar2) do
-    loop do
+end
+
+in_thread(name: :guitar2) do
+  loop do
+    use_synth :dtri
+    #starts at measure 8
+    riffw2 = (ring :r)
+    8.times do
+      play riffw2.tick
+      sleep 1
+    end
+    riff2 = (ring :e3, :g3, :e3, :g3, :e3, :a3, :e3, :a3)
+    play  riff2.tick release: 0.25, cutoff: 80
+    sleep 0.25
+    4.times do
       use_synth :dtri
-      riff2 = (ring :e3, :g3, :e3, :g3, :e3, :a3, :e3, :a3)
-      play  riff2.tick release: 0.25, cutoff: 80
-      sleep 0.25
+      play_pattern_timed [52,55],[0.25], cutoff: 80
       4.times do
-        use_synth :dtri
-        play_pattern_timed [52,55],[0.25], cutoff: 80
-        4.times do
-          play_pattern_timed [52,57],[0.25], cutoff: 80
-          7.times do
-            play_pattern_timed [52,55],[0.25], cutoff: 80
+        play_pattern_timed [52,57],[0.25], cutoff: 80
+        7.times do
+          play_pattern_timed [52,55],[0.25], cutoff: 80
+          2.times do
+            play_pattern_timed [52,59],[0.25], cutoff: 80
             2.times do
-              play_pattern_timed [52,59],[0.25], cutoff: 80
-              2.times do
-                play_pattern_timed [52,57],[0.25], cutoff: 80
-                4.times do
-                  play_pattern_timed [52,55],[0.25], cutoff: 80
+              play_pattern_timed [52,57],[0.25], cutoff: 80
+              4.times do
+                play_pattern_timed [52,55],[0.25], cutoff: 80
+                riff3 = (ring :r)
+                13.times do
+                  play riff3.tick
+                  sleep 1
                 end
               end
             end
@@ -40,44 +66,59 @@ live_loop :guitars do
       end
     end
   end
-  in_thread(name: :guitar3) do
-    loop do
-      2.times do
-        use_synth :dtri
-        play_pattern_timed [43,42,42,42,42], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
-      #10
-      1.times do
-        use_synth :dtri
-        play_pattern_timed [45,45,45,45,45], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
-      #11
-      1.times do
-        use_synth :dtri
-        play_pattern_timed [43,47,47,47,47], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
-      #12-14
-      3.times do
-        use_synth :dtri
-        play_pattern_timed [43,47,47,47,43], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
-      #15
-      1.times do
-        use_synth :dtri
-        play_pattern_timed [45,45,45,45,45], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
-      #16-17
-      2.times do
-        use_synth :dtri
-        play_pattern_timed [43,47,47,47,47], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
+end
+in_thread(name: :guitar3) do
+  loop do
+    #start at measure8
+    riffw3 = (ring :r)
+    8.times do
+      play riffw3.tick
+      sleep 1
+    end
+    2.times do
+      use_synth :dtri
+      play_pattern_timed [43,42,42,42,42], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
+    end
+    #10
+    1.times do
+      use_synth :dtri
+      play_pattern_timed [45,45,45,45,45], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
+    end
+    #11
+    1.times do
+      use_synth :dtri
+      play_pattern_timed [43,47,47,47,47], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
+    end
+    #12-14
+    3.times do
+      use_synth :dtri
+      play_pattern_timed [43,47,47,47,43], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
+    end
+    #15
+    1.times do
+      use_synth :dtri
+      play_pattern_timed [45,45,45,45,45], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
+    end
+    #16-17
+    2.times do
+      use_synth :dtri
+      play_pattern_timed [43,47,47,47,47], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
+    end
+    
+    #27-30
+    riff4 = (ring :r)
+    10.times do
+      play riff4.tick
+      sleep 1
+    end
+    
+    4.times do
+      use_synth :dtri
+      play_pattern_timed [43,47,47,47,47], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
       
-      #27-30
-      sleep 10
-      4.times do
-        use_synth :dtri
-        play_pattern_timed [43,47,47,47,47], [0.125,0.25,0.25,0.25,0.125], cutoff: 80
-      end
+      
+      
     end
   end
 end
+##| end
