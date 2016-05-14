@@ -1,5 +1,6 @@
 //This sets the variable for the spacebar.
 var spaceKey;
+var speed;
 
 //This sets the score to start at -1.
 var score = -1;
@@ -53,7 +54,7 @@ var mainState = {
 
 		//This sets the physics on the player in terms of the gravity and the bounce.
 		this.player.body.bounce.y = 0;
-		this.player.body.gravity.y = 300;
+		this.player.body.gravity.y = 600;
 
 		//This creates the first obstacle on the right side of the screen.
 		this.obstacle = game.add.sprite(700,game.world.height, 'obstacle');
@@ -78,6 +79,8 @@ var mainState = {
 		//This will create a new wall if the old wall goes off the screen.
 		if (this.obstacle.x < 0) {
 			this.obstacle.kill();
+			speed = Math.floor(Math.random()* 0.3);
+			console.log(speed);
 			this.obstacle = game.add.sprite(900,game.world.height, 'obstacle');
 			this.obstacle.scale.setTo(1,0.2);
 			this.obstacle.anchor.setTo(0,1);
@@ -93,7 +96,8 @@ var mainState = {
 
 		//This will move the obstacle to the left if it is on the right side of the screen.
 		if (this.obstacle.x > 100) {
-			this.obstacle.x -= 0.5;
+			this.obstacle.x -= speed;
+
 		};
 
 		//This allows the player to jump only if you press the space key and the player is touching the something at the bottom.
