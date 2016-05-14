@@ -43,7 +43,7 @@ game.onload = function(){
   // add the background
   game.bg = new Sprite(1000,730);
   game.bg.image = game.assets['assets/background.png'];
-
+  
   // #1 add game.bg to rootScene
   game.rootScene.addChild(game.bg);
 
@@ -71,7 +71,7 @@ game.onload = function(){
   game.ground.image = game.assets['assets/ground.png'];
   game.ground.x = 0;
   game.ground.y = game.height - 48;
-
+  
   // #3 add game.ground to rootScene
   game.rootScene.addChild(game.ground);
 
@@ -100,12 +100,12 @@ game.onload = function(){
 // listen for tap/click
 function game_touched(){
   if(game.started){
-
+    
     // #7 flap
     game.avatar.ySpeed = -game.flap_strength;
 
   }else{
-
+    
     // #6 start game
     game.started = true;
     // #6 remove getready and instructions
@@ -141,10 +141,10 @@ game.onenterframe = function(){
 
     // check if we need to spawn obstacle
     if(game.distance % game.obstacle_frequency == 0){
-
+      
       // #11 spawn obstacle
       spawnObstacle();
-
+      
       // clean up old obstacles
       for (var i = 0; i < obstacles.childNodes.length; i++) {
         if(obstacles.childNodes[i].x + obstacles.x + 100 < -85){
@@ -173,7 +173,7 @@ game.onenterframe = function(){
         scoreBoard.text++;
       }
     }
-
+    
   }
 } // end game.onenterframe #game loop
 
@@ -194,7 +194,7 @@ function spawnObstacle(){
   bottom.image = game.assets['assets/obstacle_bottom.png'];
   bottom.x = -obstacles.x + game.width;
   bottom.y = pos;
-
+  
   // #8 add bottom obstacle to obstacles group
   obstacles.addChild(bottom);
 

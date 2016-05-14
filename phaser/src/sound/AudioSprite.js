@@ -57,9 +57,9 @@ Phaser.AudioSprite = function (game, key) {
     {
         var marker = this.config.spritemap[k];
         var sound = this.game.add.sound(this.key);
-
+        
         sound.addMarker(k, marker.start, (marker.end - marker.start), null, marker.loop);
-
+        
         this.sounds[k] = sound;
     }
 
@@ -76,7 +76,7 @@ Phaser.AudioSprite.prototype = {
 
     /**
      * Play a sound with the given name.
-     *
+     * 
      * @method Phaser.AudioSprite#play
      * @param {string} [marker] - The name of sound to play
      * @param {number} [volume=1] - Volume of the sound you want to play. If none is given it will use the volume given to the Sound when it was created (which defaults to 1 if none was specified).
@@ -92,7 +92,7 @@ Phaser.AudioSprite.prototype = {
 
     /**
      * Stop a sound with the given name.
-     *
+     * 
      * @method Phaser.AudioSprite#stop
      * @param {string} [marker=''] - The name of sound to stop. If none is given it will stop all sounds in the audio sprite.
      */
@@ -114,7 +114,7 @@ Phaser.AudioSprite.prototype = {
 
     /**
      * Get a sound with the given name.
-     *
+     * 
      * @method Phaser.AudioSprite#get
      * @param {string} marker - The name of sound to get.
      * @return {Phaser.Sound} The sound instance.
