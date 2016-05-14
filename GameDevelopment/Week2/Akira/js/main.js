@@ -12,7 +12,7 @@ var mainState = {
 		//These foure things sets the assets for the game. If you want to add music or images, there is where you would preload it.
 		game.load.image('background', 'assets/background.png');
 		game.load.image('player', 'assets/BananaPlayer.png');
-		game.load.image('ground', 'assets/DevleaguePlatform.png');
+		game.load.image('ground', 'assets/DevleaguePlatformV3.png');
 		game.load.image('obstacle', 'assets/wallVertical.png');
 		//If you'd like to load music files, the format would look like this. game.load.audio('[name of music]', ['[location for music file]']);
 
