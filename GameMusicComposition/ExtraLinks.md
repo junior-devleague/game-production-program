@@ -6,3 +6,6 @@ https://www.youtube.com/watch?v=T5Cp55MvX54
 
 This is a good game to become familiar with sound engineering. Master and EQ
 https://pae.izotope.com/
+
+Use Python3 to interface with Sonic-PI
+https://pypi.python.org/pypi/python-sonic
