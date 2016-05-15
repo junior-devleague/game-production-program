@@ -3,4 +3,4 @@
 
 
 ![](http://phaser.io/images/img.png)
-<http://junior-devleague.github.io/GameProductionProgram/>
+<p><http://junior-devleague.github.io/GameProductionProgram/>
