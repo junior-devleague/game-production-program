@@ -1,2 +1,3 @@
 # Game-Production-Program
-Alpha Solo-Play as a "Game Developer" and "Game Music Composer."
+αlpha Solo-Play |"Game Developer" & "Game Music Composer" for Phaser.io v.2.4.7
+![](http://phaser.io/images/img.png)
