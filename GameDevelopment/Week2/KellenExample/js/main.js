@@ -132,7 +132,7 @@ var mainState = {
 
 		//This will tell you "You Lose!" if the player is pushed off the left side of the screen.
 		if (this.player.x < 0){
-			scoreText = game.add.text(350,200, 'You Lose!', {fill: '#ff0000'});
+			scoreText = game.add.text(350,200, ' ', {fill: '#ff0000'});
 			this.obstacle.kill();
 			this.player.kill();
 			this.enemy.kill();
