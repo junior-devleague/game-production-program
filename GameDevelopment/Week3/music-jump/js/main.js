@@ -75,7 +75,7 @@ var mainState = {
 
 		//This is where the game engine recognizes collision betwen the player and the ground or the obstacle.
 		game.physics.arcade.collide(this.player, this.ground);
-		game.physics.arcade.collide(this.player, this.obstacle);
+		game.physics.arcade.collide(this.player, this.obstacle, gameOver);
 
 		//This creates a condition to run the collectCoin function when the coin and the player overlap.
 		game.physics.arcade.overlap(this.player, this.coin, collectCoin, null, this);
@@ -130,10 +130,10 @@ var mainState = {
 		};
 
 		//This will tell you "You Lose!" if the player is pushed off the left side of the screen.
-		if (this.player.x < 0){
-			scoreText = game.add.text(350,200, 'You Lose!', {fill: '#ff0000'});
-			this.obstacle.kill();
-			this.player.kill();
+		function gameOver(player,obstacle){
+			gameOverText = game.add.text(350,200, 'You Lose!', {fill: '#ff0000'});
+			player.kill();
+			obstacle.kill();
 		};
 	}
 };
