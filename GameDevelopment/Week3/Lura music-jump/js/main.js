@@ -87,7 +87,8 @@ var mainState = {
 		//This will create a new wall if the old wall goes off the screen.
 		if (this.obstacle.x < 0) {
 			this.obstacle.kill();
-			randNum = Math.floor((Math.random() * 10) * 0.01) + 0.02;
+			randNum = (Math.floor(Math.random()*10)*0.01)+0.02
+			console.log(randNum);
 			this.obstacle = game.add.sprite(900,game.world.height, 'obstacle');
 			this.obstacle.scale.setTo(1,0.2);
 			this.obstacle.anchor.setTo(0,1);
