@@ -11,7 +11,7 @@ var mainState = {
 
 		//These foure things sets the assets for the game. If you want to add music or images, there is where you would preload it.
 		game.load.image('background', 'assets/background.png');
-		game.load.image('player', 'assets/player.png');
+		game.load.image('player', 'assets/player.jpg');
 		game.load.image('ground', 'assets/wallHorizontal.png');
 		game.load.image('obstacle', 'assets/wallVertical.png');
 		game.load.image('coin', 'assets/coin.png');
@@ -25,7 +25,7 @@ var mainState = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		//This sets the background color to #3498db on the hex system.
-		game.stage.backgroundColor = '#3498db';
+		game.stage.backgroundColor = '#333333';
 
 		//This gives us sharp corners for all of our images.
 		game.renderer.renderSession.roundPixels = true;
