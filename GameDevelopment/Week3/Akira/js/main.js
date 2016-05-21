@@ -11,7 +11,7 @@ var mainState = {
 
 		//These foure things sets the assets for the game. If you want to add music or images, there is where you would preload it.
 		game.load.image('background', 'assets/background.png');
-		game.load.image('player', 'player.png');
+		game.load.image('player', 'assets/player.png');
 		game.load.image('ground', 'assets/wallHorizontal.png');
 		game.load.image('obstacle', 'assets/wallVertical.png');
 		game.load.image('coin', 'assets/coin.png');
@@ -51,8 +51,9 @@ var mainState = {
 		this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 		//This sets the physics on the player in terms of the gravity and the bounce.
-		this.player.body.bounce.y = 0.3;
-		this.player.body.gravity.y = 600;
+		this.player.body.bounce.y = 0.1;
+		this.player.body.gravity.y = 600
+		;
 
 		//This creates a new sprite for a coin to be collected
 		this.coin = game.add.sprite(800,500,'coin');
@@ -81,7 +82,7 @@ var mainState = {
 		game.physics.arcade.overlap(this.player, this.coin, collectCoin, null, this);
 
 		//This will set the horizontal movement to zero.
-		this.player.body.velocity.x = 0;
+		this.player.body.velocity.x = 1;
 
 		//This will create a new wall if the old wall goes off the screen.
 		if (this.obstacle.x < 0) {
@@ -91,6 +92,13 @@ var mainState = {
 			this.obstacle.anchor.setTo(0,1);
 			game.physics.arcade.enable(this.obstacle);
 			this.obstacle.body.immovable = true;
+		};
+
+		if (this.coin.x < 0) {
+			this.coin.kill();
+			this.coin = game.add.sprite(900,500, 'coin');
+			this.coin.anchor.setTo(0,1);
+			game.physics.arcade.enable(this.coin);
 		};
 
 		//This creates a place to add sound when the obstacle reaches the player.
@@ -106,7 +114,7 @@ var mainState = {
 
 		//This moves the coin to the left.
 		if (this.coin.x > 600) {
-			this.coin.x -= 0.12;
+			this.coin.x -= 0.1;
 		};
 
 		//This removes the coin and adds 10 points to the score.
@@ -115,6 +123,7 @@ var mainState = {
 			coin.kill();
 			score+=10;
 			scoreText.text = 'score: ' + score;
+			this.coin.anchor.setTo(0,1);
 		}
 
 		//This allows the player to jump only if you press the space key and the player is touching the something at the bottom.
@@ -123,15 +132,17 @@ var mainState = {
 			//This is a good place to add the sound for when the player jumps.
 		};
 
+
 		//This will update the score if the player has not been pushed off the screen, and the wall has gone off the left side.
 		if (this.obstacle.x < 5 && this.player.x > 5){
 			score++;
+			console.log(score);
 			scoreText.text = 'score: ' + score;
 		};
 
 		//This will tell you "You Lose!" if the player is pushed off the left side of the screen.
 		function gameOver(player,obstacle){
-			gameOverText = game.add.text(350,200, 'You Lose!', {fill: '#ff0000'});
+			gameOverText = game.add.text(350,200, 'You Lose!', {fill: '#ff0000'}); 
 			player.kill();
 			obstacle.kill();
 		};
