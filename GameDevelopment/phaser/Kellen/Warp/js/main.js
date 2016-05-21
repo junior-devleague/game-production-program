@@ -9,14 +9,37 @@ var mainState = {
 	preload: function(){
 		//These four things sets the assets for the game.
 		game.load.image('ship', 'assets/ship.png');
-	}
+		game.load.image('enemy', 'assets/enemy.png')
+	},
 
 	create: function(){
 		//This sets the game physics to Arcade style.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		//This sets the background color to something.
-		game.stage.backgroundColor = '#3498db';
+		game.stage.backgroundColor = 'purple';
+
+				//This gives us sharp corners for all of our images.
+		game.renderer.renderSession.roundPixels = true;
+
+		//This would be a good place to start the general background music for the game.
+
+		this.obstacle = game.add.sprite(200, 200, 'ship');
+		this.obstacle.scale.setTo(0.15,0.15);
+		this.obstacle.anchor.setTo(0,1);
+		game.physics.arcade.enable(this.obstacle);
+		this.obstacle.body.immovable = false;
+
+		//The enemy testing
+		this.enemy = game.add.sprite(800,550, 'enemy');
+		this.enemy.scale.setTo(1,1);
+		this.enemy.anchor.setTo(2,2);
+		game.physics.arcade.enable(this.enemy);
+		this.enemy.body. immovable = true;
+	},
+
+	update: function(){
+		game.physics.arcade.collide(this.ship, this.enemy);
 	}
 };
 
