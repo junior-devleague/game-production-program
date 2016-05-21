@@ -15,4 +15,11 @@ programming concepts and music theory and harmonics
 functions
 variables
 arrays
-rrand(min,max)
+
+
+rand - Simply returns the next value in the random stream 
+rrand - Returns a random value within a range 
+rrand_i - Returns a random whole number within a range 
+one_in - Returns true or false with the given probability 
+dice - Imitates rolling a dice and returns a value between 1 and 6 
+choose - Chooses a random value from a list 
