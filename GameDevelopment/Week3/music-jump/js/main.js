@@ -1,5 +1,6 @@
 //This sets the variable for the spacebar.
 var spaceKey;
+var randInt = 0.05;
 
 //This sets the score to start at -1.
 var score = -1;
@@ -87,21 +88,18 @@ var mainState = {
 		if (this.obstacle.x < 0) {
 			this.obstacle.kill();
 			this.obstacle = game.add.sprite(900,game.world.height, 'obstacle');
+			randInt = (Math.floor(Math.random()*10)*0.01)+0.02
+			console.log(randInt);
 			this.obstacle.scale.setTo(1,0.2);
 			this.obstacle.anchor.setTo(0,1);
 			game.physics.arcade.enable(this.obstacle);
 			this.obstacle.body.immovable = true;
 		};
 
-		//This creates a place to add sound when the obstacle reaches the player.
-		if (this.obstacle.x < 20 && this.obstacle.x > 15) {
-			console.log("sound!");
-			//This is where you'd add a sound que when the obstacle reaches the player.
-		}
-
 		//This will move the obstacle to the left if it is on the right side of the screen.
 		if (this.obstacle.x > 600) {
-			this.obstacle.x -= 0.05;
+			this.obstacle.x -= randInt;
+			// this.obstacle.x -= 0.05;
 		};
 
 		//This moves the coin to the left.
