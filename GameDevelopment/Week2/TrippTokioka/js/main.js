@@ -54,7 +54,7 @@ var mainState = {
 
 		//This sets the physics on the player in terms of the gravity and the bounce.
 		this.player.body.bounce.y = 0;
-		this.player.body.gravity.y = 600;
+		this.player.body.gravity.y = 2000;
 
 		//This creates the first obstacle on the right side of the screen.
 		this.obstacle = game.add.sprite(700,game.world.height, 'obstacle');
@@ -101,7 +101,7 @@ var mainState = {
 		};
 
 		//This allows the player to jump only if you press the space key and the player is touching the something at the bottom.
-		if (this.spaceKey.isDown && this.player.body.touching.down){
+		if (this.spaceKey.isDown){
 			this.player.body.velocity.y = -300;
 			//This is a good place to add the sound for when the player jumps.
 		};
