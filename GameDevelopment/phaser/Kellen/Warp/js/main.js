@@ -1,6 +1,3 @@
-//This sets the variable for the mouse.
-var mouse;
-
 //This sets the variable for the ship.
 var ship;
 
@@ -44,15 +41,23 @@ var mainState = {
 	},
 
 	update: function(){
-		game.physics.arcade.collide(this.ship, this.enemy);
-	      game.physics.arcade.moveToPointer('ship', 400);
+	game.physics.arcade.collide(this.ship, this.enemy);
+	//  only move when you click
+    if (game.input.mousePointer.isDown)
+    {
+        //  400 is the speed it will move towards the mouse
+        game.physics.arcade.moveToPointer(ship, 400);
 
-	      //  if it's overlapping the mouse, don't move any more
-	      if (Phaser.Rectangle.contains(this.ship.body, game.input.x, game.input.y))
-	      {
-	      	//It's not getting the velocity for some reason.
-	          this.ship.body.velocity.setTo(0, 0);
-	      }
+        //  if it's overlapping the mouse, don't move any more
+        if (Phaser.Rectangle.contains(ship.body, game.input.x, game.input.y))
+        {
+            ship.body.velocity.setTo(0, 0);
+        }
+    }
+    else
+    {
+        ship.body.velocity.setTo(0, 0);
+    }
 	}
 };
 
