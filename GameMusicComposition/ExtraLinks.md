@@ -9,3 +9,7 @@ https://pae.izotope.com/
 
 Use Python3 to interface with Sonic-PI
 https://pypi.python.org/pypi/python-sonic
+
+A great free visual art software
+https://krita.org/
+
