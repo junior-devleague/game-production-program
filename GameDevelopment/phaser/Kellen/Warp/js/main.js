@@ -1,5 +1,5 @@
 //This sets the variable for the ship.
-var ship;
+var ship = 'ship';
 
 //This sets the score to start at -1.
 var score = -1;
@@ -46,7 +46,7 @@ var mainState = {
     if (game.input.mousePointer.isDown)
     {
         //  400 is the speed it will move towards the mouse
-        game.physics.arcade.moveToPointer(ship, 400);
+        game.physics.arcade.moveToPointer('ship', 400);
 
         //  if it's overlapping the mouse, don't move any more
         if (Phaser.Rectangle.contains(ship.body, game.input.x, game.input.y))
