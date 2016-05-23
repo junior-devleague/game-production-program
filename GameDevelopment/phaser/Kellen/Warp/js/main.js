@@ -1,5 +1,8 @@
-//This sets the variable for the mouse
+//This sets the variable for the mouse.
 var mouse;
+
+//This sets the variable for the ship.
+var ship;
 
 //This sets the score to start at -1.
 var score = -1;
@@ -11,10 +14,12 @@ var mainState = {
 		game.load.image('ship', 'assets/ship.png');
 		game.load.image('enemy', 'assets/enemy.png')
 	},
-
 	create: function(){
 		//This sets the game physics to Arcade style.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+
+		//enable the game physics
+		game.physics.enable('ship', Phaser.Physics.ARCADE);
 
 		//This sets the background color to something.
 		game.stage.backgroundColor = 'purple';
@@ -40,6 +45,14 @@ var mainState = {
 
 	update: function(){
 		game.physics.arcade.collide(this.ship, this.enemy);
+	      game.physics.arcade.moveToPointer('ship', 400);
+
+	      //  if it's overlapping the mouse, don't move any more
+	      if (Phaser.Rectangle.contains(this.ship.body, game.input.x, game.input.y))
+	      {
+	      	//It's not getting the velocity for some reason.
+	          this.ship.body.velocity.setTo(0, 0);
+	      }
 	}
 };
 
