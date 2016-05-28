@@ -95,7 +95,7 @@ var mainState = {
 		game.load.image('obstacle', 'assets/wallVertical.png');
 		game.load.image('coin', 'assets/coin.png');
 		game.load.audio('fail', 'assets/GameOver.mp3');
-		game.load.audio('music', 'assets/blastpi.wav');
+		game.load.audio('music', 'assets/chocobo-modloop01.mp3');
 		game.load.audio('coin', 'assets/coin.mp3');
 		//If you'd like to load music files, the format would look like this. game.load.audio('[name of music]', ['[location for music file]']);
 
@@ -107,17 +107,16 @@ var mainState = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		//This sets the background color to #3498db on the hex system.
-		game.stage.backgroundColor = '#3385ff≈';
+		game.stage.backgroundColor = '#3385ff';
 
 		//This gives us sharp corners for all of our images.
 		game.renderer.renderSession.roundPixels = true;
 
 		// This would be a good place to start the general music for the game.
 		audio = new WarpedSound(game, 'music', 3);
-		gamefail = game.add.audio('fail');
+		gameSound = game.add.audio('win');
 		coinSound = game.add.audio('coin');
     	audio.tweenSpeed(1);
-    	audio.loop=true
 		audio.play();
 
 		//This sets up a group call platforms. For future functionality we can set all horizontal surfaces to this group.
@@ -238,7 +237,7 @@ var mainState = {
 		function gameOver(player,obstacle){
 			gameOverText = game.add.text(350,200, 'Game Over Yeah!', {fill: '#ff0000'});
 			audio.pause();
-			gamefail.play();
+			gameSound.play();
 			player.kill();
 			obstacle.kill();
 		};
