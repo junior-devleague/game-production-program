@@ -81,7 +81,7 @@ var randObstacle = -250;
 var randCoin = -400;
 
 //This sets the score to start at -1.
-var score = -1;
+var score = 0;
 
 //This is the object which runs the game.
 var mainState = {
@@ -173,6 +173,8 @@ var mainState = {
 		//This will create a new wall if the old wall goes off the screen.
 		if (this.obstacle.x < 0) {
 			this.obstacle.kill();
+			score++;
+			scoreText.text = 'score: ' + score;
 			this.obstacle = game.add.sprite(900,game.world.height, 'obstacle');
 			//This below sets a random speed for the next obstacle, the range is from -200 to -600
 			//randInt = -(Math.floor(Math.random()*40)*10)-200;
@@ -226,10 +228,10 @@ var mainState = {
 		};
 
 		//This will update the score if the player has not been pushed off the screen, and the wall has gone off the left side.
-		if (this.obstacle.x < 5 && this.player.x > 5){
-			score++;
-			scoreText.text = 'score: ' + score;
-		};
+		//if (this.obstacle.x < 5 && this.player.x > 5){
+		//	score++;
+		//	scoreText.text = 'score: ' + score;
+		//};
 
 		//This will tell you "You Lose!" if the player is pushed off the left side of the screen.
 		function gameOver(player,obstacle){
