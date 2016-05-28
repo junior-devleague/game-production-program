@@ -17,6 +17,9 @@ var enemyBullet;
 var firingTimer = 0;
 var stateText;
 var livingEnemies = [];
+var audio;
+var gameMusic;
+
 
 //This is the object which runs the game.
 	function preload(){
@@ -27,6 +30,7 @@ var livingEnemies = [];
         game.load.image('enemyBullet', 'assets/enemyBullet.png');
         game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
         game.load.image('starfield', 'assets/background.png');
+        game.load.audio('music', 'assets/music/mainSong.mp3');
 	}
 
 	function create(){
@@ -83,6 +87,13 @@ var livingEnemies = [];
         
         //firing button
         fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        
+        gamemus = game.add.audio('music');
+        gamemus.loop = true;
+        gamemus.play();
+        
+        
+
 	}
 
     function createAliens () {
