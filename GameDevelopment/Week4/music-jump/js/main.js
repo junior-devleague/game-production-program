@@ -1,8 +1,10 @@
 //This sets the variable for the spacebar.
 var spaceKey;
-var randInt = -200;
+//This sets the variable for music
 var winMusic;
 var gameMusic;
+//This sets the initial speed for the obstacle and coins
+var randInt = -200;
 var randCoin = -400;
 
 //This sets the score to start at -1.
@@ -13,14 +15,15 @@ var mainState = {
 
 	preload: function(){
 
-		//These foure things sets the assets for the game. If you want to add music or images, there is where you would preload it.
+		//These things sets the assets for the game. If you want to add music or images, there is where you would preload it.
 		game.load.image('background', 'assets/background.png');
 		game.load.image('player', 'assets/player.png');
 		game.load.image('ground', 'assets/wallHorizontal.png');
 		game.load.image('obstacle', 'assets/wallVertical.png');
 		game.load.image('coin', 'assets/coin.png');
-		game.load.audio('win', 'assets/win.mp3')
-		game.load.audio('music', 'assets/chocobo-modloop01.mp3')
+		game.load.audio('win', 'assets/win.mp3');
+		game.load.audio('music', 'assets/chocobo-modloop01.mp3');
+		game.load.audio('coin', 'assets/coin.mp3');
 		//If you'd like to load music files, the format would look like this. game.load.audio('[name of music]', ['[location for music file]']);
 
 	},
@@ -36,12 +39,13 @@ var mainState = {
 		//This gives us sharp corners for all of our images.
 		game.renderer.renderSession.roundPixels = true;
 
-		// This would be a good place to start the general background music for the game.
-		// gameMusic = game.add.audio('win');
-		// gameMusic.setAttribute('src','assets/chocobo-modloop01.mp3');
+		// This would be a good place to start the general music for the game.
+		gameSound = game.add.audio('win');
+		coinSound = game.add.audio('coin');
 		gameMusic = game.add.audio('music');
+		//gameMusic = a Phaser.Sound objectvar pbr =  { value: 2, defaultValue: 2};
 		gameMusic.volume -= 0.5;
-		gameMusic.playbackRate = 0.5;
+		gameMusic._sound.playbackRate.value = pbr;
 		gameMusic.play();
 
 		//This sets up a group call platforms. For future functionality we can set all horizontal surfaces to this group.
@@ -67,12 +71,10 @@ var mainState = {
 		this.player.body.gravity.y = 600;
 
 		//This creates a new sprite for a coin to be collected
-
 		coins = game.add.group();
 		this.coin = coins.create(800,500,'coin');
 		this.coin.anchor.setTo(0,1);
 		game.physics.arcade.enable(this.coin);
-
 
 		//This creates the first obstacle on the right side of the screen.
 		this.obstacle = game.add.sprite(700,game.world.height, 'obstacle');
@@ -87,10 +89,10 @@ var mainState = {
 
 	update: function(){
 
-		//This is where the game engine recognizes collision betwen the player and the ground or the obstacle.
+		//This is where the game engine recognizes collision between the player and the ground.
 		game.physics.arcade.collide(this.player, this.ground);
+		//This is where the game engine recognizes collision between the player and the obstacle, and will run the gameOver function if they hit.
 		game.physics.arcade.collide(this.player, this.obstacle, gameOver);
-
 		//This creates a condition to run the collectCoin function when the coin and the player overlap.
 		game.physics.arcade.overlap(this.player, this.coin, collectCoin, null, this);
 
@@ -110,9 +112,11 @@ var mainState = {
 			this.obstacle.body.immovable = true;
 		};
 
+		//This will create a new coin if the old coin goes off the screen.
 		if (this.coin.x < 0){
 			this.coin.kill();
 			this.coin = coins.create(800, 500, 'coin');
+			//The below also sets a new speed for the coin between -200 and -600.
 			randCoin = -(Math.floor(Math.random()*40)*10)-200;
 			console.log("coin"+randCoin)
 			game.physics.arcade.enable(this.coin);
@@ -121,7 +125,6 @@ var mainState = {
 		//This will move the obstacle to the left if it is on the right side of the screen.
 		if (this.obstacle.x > 600) {
 			this.obstacle.body.velocity.x = randInt;
-			// this.obstacle.x -= 0.05;
 		};
 
 		//This moves the coin to the left.
@@ -132,12 +135,13 @@ var mainState = {
 		//This removes the coin and adds 10 points to the score.
 		function collectCoin(player,coin){
 			//This is a good place to add sound for collecting the coin.
+			coinSound.play();
 			coin.kill();
 			score+=10;
 			scoreText.text = 'score: ' + score;
+			//This creates a new coin now that one has been collected.
 			this.coin = coins.create(800, 500, 'coin');
 			randCoin = -(Math.floor(Math.random()*40)*10)-200;
-			console.log("coin"+randCoin)
 			game.physics.arcade.enable(this.coin);
 		};
 
@@ -147,6 +151,7 @@ var mainState = {
 		if (this.spaceKey.isDown && this.player.body.touching.down){
 			this.player.body.velocity.y = -300;
 			//This is a good place to add the sound for when the player jumps.
+			coinSound.play();
 		};
 
 		//This will update the score if the player has not been pushed off the screen, and the wall has gone off the left side.
@@ -155,14 +160,11 @@ var mainState = {
 			scoreText.text = 'score: ' + score;
 		};
 
-		// if (this.obstacle.x === 50) {
-		// 	console.log("music");
-		// 	winMusic.play();
-		// };
-
 		//This will tell you "You Lose!" if the player is pushed off the left side of the screen.
 		function gameOver(player,obstacle){
 			gameOverText = game.add.text(350,200, 'You Lose!', {fill: '#ff0000'});
+			gameMusic.pause();
+			gameSound.play();
 			player.kill();
 			obstacle.kill();
 		};
