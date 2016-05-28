@@ -98,8 +98,9 @@ var mainState = {
 		game.load.spritesheet('squid', 'assets/Alien.png', 32, 32);
 		game.load.image('coin', 'assets/coin.png');
 		game.load.audio('win', 'assets/win.mp3');
-		game.load.audio('music', 'assets/chocobo-modloop01.mp3');
-		game.load.audio('coin', 'assets/coin.mp3');
+		game.load.audio('music', 'assets/main.wav');
+		game.load.audio('coinGet', 'assets/coin.wav');
+		game.load.audio('jump', 'assets/jump.wav');
 		//If you'd like to load music files, the format would look like this. game.load.audio('[name of music]', ['[location for music file]']);
 
 	},
@@ -119,7 +120,7 @@ var mainState = {
 		// This would be a good place to start the general music for the game.
 		audio = new WarpedSound(game, 'music', 0.3);
 		gameSound = game.add.audio('win');
-		coinSound = game.add.audio('coin');
+		coinSound = game.add.audio('coinGet');
     	audio.tweenSpeed(1);
 		audio.play();
 
@@ -252,13 +253,11 @@ var mainState = {
 			console.log("level up");
 			levelText = game.add.text(350,100, 'Level 3', {fill: '#00FFFF'});
 			this.player.loadTexture('squid',15,true);
-		} else if (score >= 10){
+		} else if (score >= 50){
 			console.log("level up");
 			levelText = game.add.text(350,100, 'Level 2', {fill: '#00FFFF'});
-			this.player.loadTexture('cat',15,true);
-
-		this.player.animations.play('run', 15, true);
-    	this.player.animations.add('run');
+			this.player.loadTexture('cat');
+    		this.player.animations.play('run', 15, true);
 		} else {
 			levelText = game.add.text(350,100, 'Level 1', {fill: '#00FFFF'});
 		};
