@@ -4,8 +4,8 @@ var sprite;
 //This sets the score to start at -1.
 var score = -1;
 
-//key1 variable.
-var key1
+//bullet variable.
+
 
 //This is the object which runs the game.
 var mainState = {
@@ -21,7 +21,7 @@ var mainState = {
 
 		//enable the game physics
 		sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'ship');
-    game.physics.enable(sprite, Phaser.Physics.ARCADE);
+        game.physics.enable(sprite, Phaser.Physics.ARCADE);
 
 		//This sets the background color to something.
 		game.stage.backgroundColor = 'purple';
@@ -30,8 +30,6 @@ var mainState = {
 		game.renderer.renderSession.roundPixels = true;
 
 		//hotkeys
-		key1 = game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
-    	key1.onDown.add(console.log("it works"));
 
 		//This would be a good place to start the general background music for the game.
 
@@ -48,9 +46,6 @@ var mainState = {
 
 	update: function(){
 	game.physics.arcade.collide(this.ship, this.enemy);
-	//  only move when you click
-    if (game.input.mousePointer.isDown)
-    {
         //  400 is the speed it will move towards the mouse
         game.physics.arcade.moveToPointer(sprite, 400);
 
@@ -59,11 +54,6 @@ var mainState = {
         {
             sprite.body.velocity.setTo(0, 0);
         }
-    }
-    else
-    {
-        sprite.body.velocity.setTo(0, 0);
-    }
 	}
 };
 
