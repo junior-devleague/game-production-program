@@ -76,7 +76,8 @@ var spaceKey;
 var winMusic;
 var gameMusic;
 //This sets the initial speed for the obstacle and coins
-var randInt = -200;
+var randInt;
+var randObstacle = -250;
 var randCoin = -400;
 
 //This sets the score to start at -1.
@@ -115,7 +116,7 @@ var mainState = {
 		audio = new WarpedSound(game, 'music', 0.3);
 		gameSound = game.add.audio('win');
 		coinSound = game.add.audio('coin');
-    audio.tweenSpeed(1.5);
+    	audio.tweenSpeed(1);
 		audio.play();
 
 		//This sets up a group call platforms. For future functionality we can set all horizontal surfaces to this group.
@@ -174,7 +175,8 @@ var mainState = {
 			this.obstacle.kill();
 			this.obstacle = game.add.sprite(900,game.world.height, 'obstacle');
 			//This below sets a random speed for the next obstacle, the range is from -200 to -600
-			randInt = -(Math.floor(Math.random()*40)*10)-200;
+			//randInt = -(Math.floor(Math.random()*40)*10)-200;
+			speedChange();
 			console.log(randInt);
 			this.obstacle.scale.setTo(1,0.2);
 			this.obstacle.anchor.setTo(0,1);
@@ -188,13 +190,12 @@ var mainState = {
 			this.coin = coins.create(800, 500, 'coin');
 			//The below also sets a new speed for the coin between -200 and -600.
 			randCoin = -(Math.floor(Math.random()*40)*10)-200;
-			console.log("coin"+randCoin)
 			game.physics.arcade.enable(this.coin);
 		};
 
 		//This will move the obstacle to the left if it is on the right side of the screen.
 		if (this.obstacle.x > 600) {
-			this.obstacle.body.velocity.x = randInt;
+			this.obstacle.body.velocity.x = randObstacle;
 		};
 
 		//This moves the coin to the left.
@@ -238,6 +239,34 @@ var mainState = {
 			player.kill();
 			obstacle.kill();
 		};
+
+		//This changes the speed of the music between five different outcomes. That way with every new obstacle, the music will match the speed.
+		function speedChange(){
+			randInt = Math.floor(Math.random()*5);
+				switch (randInt) {
+					case 0:
+						randObstacle = -150;
+						audio.tweenSpeed(0.5);
+						break;
+					case 1:
+						randObstacle = -200;
+						audio.tweenSpeed(0.75);
+						break;
+					case 2:
+						randObstacle = -250;
+						audio.tweenSpeed(1);
+						break;
+					case 3:
+						randObstacle = -300;
+						audio.tweenSpeed(1.25);
+						break;
+					case 4:
+						randObstacle = -350;
+						audio.tweenSpeed(1.5);
+						break;
+				}
+		}
+
 	}
 };
 
