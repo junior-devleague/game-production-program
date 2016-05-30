@@ -90,8 +90,8 @@ var mainState = {
 		}
 
 		//This will move the obstacle to the left if it is on the right side of the screen.
-		if (this.obstacle.x > 600) {
-			this.obstacle.x -= 0.05;
+		if (this.obstacle.x > 300) {
+			this.obstacle.x -= 0.10;
 		};
 
 		//This allows the player to jump only if you press the space key and the player is touching the something at the bottom.
